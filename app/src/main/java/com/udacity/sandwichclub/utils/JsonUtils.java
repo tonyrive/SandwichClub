@@ -22,23 +22,23 @@ public class JsonUtils {
         try {
             JSONObject data = new JSONObject(json);
             JSONObject name = data.getJSONObject("name");
-            mainName = name.getString("mainName");
+            mainName = name.optString("mainName");
             JSONArray knownAs = name.getJSONArray("alsoKnownAs");
             alsoKnownAs = new ArrayList<>();
             if(knownAs != null) {
                 for (int i = 0; i < knownAs.length(); i++) {
-                    alsoKnownAs.add(knownAs.getString(i));
+                    alsoKnownAs.add(knownAs.optString(i));
                 }
             }
 
-            placeOfOrigin = data.getString("placeOfOrigin");
-            description = data.getString("description");
-            image = data.getString("image");
+            placeOfOrigin = data.optString("placeOfOrigin");
+            description = data.optString("description");
+            image = data.optString("image");
             JSONArray ing = data.getJSONArray("ingredients");
             ingredients = new ArrayList<>();
             if(ing != null) {
                 for (int i = 0; i < ing.length(); i++) {
-                    ingredients.add(ing.getString(i));
+                    ingredients.add(ing.optString(i));
                 }
             }
         } catch (JSONException e) {
